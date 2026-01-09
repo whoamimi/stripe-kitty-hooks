@@ -1,0 +1,5 @@
+# app/config/google_workspace.yml
+
+- product_id: STRIPE_PRICING_TABLE_ID
+  name: Stripe Pricing Table ID
+  price: float

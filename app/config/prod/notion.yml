@@ -1,0 +1,6 @@
+# app/config/notion.yml
+# Stripe Products Configuration
+- product_id: STRIPE_PRICING_TABLE_ID
+  price_id: STRIPE_PRICING_TABLE_ID
+  name: Stripe Pricing Table ID
+  price: float

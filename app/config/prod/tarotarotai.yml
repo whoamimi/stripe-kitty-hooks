@@ -1,0 +1,14 @@
+# app/config/prod/tarotarotai.yml
+
+- name: five_orbs
+  product_id: prod_TgjiBeg2GnxzJl
+  price: 3.99
+  lookup_key: orbs_packet
+- name: ten_orbs
+  product_id: prod_TgjlpcWfKXl8Wh
+  price: 5.99
+  lookup_key: orbs_packet
+- name: fifteen_orbs
+  product_id: prod_TgjqnTJpl5N86V
+  price: 9.99
+  lookup_key: orbs_packet
