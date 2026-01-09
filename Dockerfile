@@ -5,7 +5,7 @@ FROM python:3.11-slim
 WORKDIR /code
 
 # Copy the current directory contents into the container at /code
-COPY ./stripe_payment/app /code/app
+COPY ./app /code/app
 COPY requirements.txt /code/
 
 # Install any needed packages specified in requirements.txt
