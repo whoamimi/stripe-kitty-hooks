@@ -143,7 +143,7 @@ def setup_workspace():
 
         acc = setup_stripe_account()
         fb = FirebaseConfig(
-            url=os.getenv("FIREBASE_DATABASE_URL", ""),
+            url=os.getenv("GCP_FIREBASE_DATABASE_URL", ""),
             _service_account_path=dir_path["app_path"] / "config" / "_secrets" / "serviceAccount.json"
         )
         return StripeAppConfig(apps=apps, workspace=dir_path, account=acc, database=fb)
