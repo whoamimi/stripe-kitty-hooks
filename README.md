@@ -13,6 +13,7 @@ Supports Subscription plans and pay by tokens.
 
 - Firebase Authentication
 - Firebase Realtime Database
+- Firebase Service Account Key
 - Stripe Account
 
 **Stripe Websocket Core Services**
@@ -27,20 +28,29 @@ Supports Subscription plans and pay by tokens.
 2. and run:
 
 ```bash
-python -m stripe_payment.app.main
+python -m app.main
 # or for FastAPI
-uvicorn stripe_payment.app.main:app --reload
+uvicorn app.main:app --reload
 # or lazy start
-PYTHONPATH=./stripe_payment uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+PYTHONPATH=./stripe_payment uvicorn app.main:app --reload --host 0.0.0.0 --port 8080
 ```
 
 **To Deploy on Google Cloud Run**
 
 ```bash
-gcloud run deploy \
+gcloud run deploy stripe-kitty-hooks \
   --source . \
   --region australia-southeast1 \
   --allow-unauthenticated
+
+# Create secret from local file
+gcloud secrets create firebase-service-account \
+  --data-file=app/config/_secrets/serviceAccount.json
+
+# Grant access to Cloud Run
+gcloud run services update stripe-kitty-hooks \
+  --region=australia-southeast1 \
+  --set-secrets=/code/app/config/_secrets/serviceAccount.json=firebase-service-account:latest
 ```
 
 **Reference**

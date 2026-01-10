@@ -105,8 +105,12 @@ def setup_stripe_account() -> StripeAccountConfig:
     webhook_secret = os.getenv("STRIPE_WEBHOOK_SECRET", "")
 
     if not all([secret_key, restricted_key]):
-        print("Error: Missing Stripe configuration in environment variables.")
-        sys.exit(1)
+        raise RuntimeError(
+            "Missing required Stripe configuration in environment variables. "
+            "Please set STRIPE_SECRET_KEY and STRIPE_RESTRICTED_KEY. "
+            f"Current values: STRIPE_SECRET_KEY={'set' if secret_key else 'MISSING'}, "
+            f"STRIPE_RESTRICTED_KEY={'set' if restricted_key else 'MISSING'}"
+        )
 
     return StripeAccountConfig(
         secret_key=secret_key,
