@@ -145,10 +145,16 @@ def setup_workspace():
                 else:
                     raise ValueError(f"Invalid data format in {file}: expected a list of products.")
 
+        if DEV_MODE is True:
+            service_account_path = dir_path["app_path"] / "config" / "_secrets" / "serviceAccount.json"
+        else:
+            # mounted path in production environment
+            service_account_path = Path(os.getenv("GCP_FIREBASE_SERVICE_ACCOUNT_PATH", ""))
+
         acc = setup_stripe_account()
         fb = FirebaseConfig(
             url=os.getenv("GCP_FIREBASE_DATABASE_URL", ""),
-            _service_account_path=dir_path["app_path"] / "config" / "_secrets" / "serviceAccount.json"
+            _service_account_path=service_account_path
         )
         return StripeAppConfig(apps=apps, workspace=dir_path, account=acc, database=fb)
 
